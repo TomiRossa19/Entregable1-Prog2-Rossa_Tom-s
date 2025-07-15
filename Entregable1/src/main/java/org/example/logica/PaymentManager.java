@@ -2,27 +2,38 @@ package org.example.logica;
 
 import org.example.logica.enums.ProveedorEnum;
 
+import java.util.concurrent.CompletableFuture;
+
 public class PaymentManager {
-    public boolean processPayment(float amount, ProveedorEnum provider){
+    public CompletableFuture<Boolean> processPaymentAsync(float amount, ProveedorEnum provider) {
+        return CompletableFuture.supplyAsync(() -> processPayment(amount, provider));
+    }
+
+    public CompletableFuture<Boolean> refundPaymentAsync(float amount, ProveedorEnum provider) {
+        return CompletableFuture.supplyAsync(() -> refundPayment(amount, provider));
+    }
+
+    // Métodos síncronos internos (los que ya tenías)
+    private boolean processPayment(float amount, ProveedorEnum provider){
         switch (provider){
             case MercadoPago:
-                MercadoPagoPaymentProcessor mercadoPagoPaymentProcessor = new MercadoPagoPaymentProcessor(new MercadoPagoPaymentGateway());
-                return mercadoPagoPaymentProcessor.processPayment(amount);
+                MercadoPagoPaymentProcessor mercadoPago = new MercadoPagoPaymentProcessor(new MercadoPagoPaymentGateway());
+                return mercadoPago.processPayment(amount);
             case PayPal:
-                PaypalPaymentProcessor paypalPaymentProcessor = new PaypalPaymentProcessor(new PayPalPaymentGateway());
-                return paypalPaymentProcessor.processPayment(amount);
+                PaypalPaymentProcessor paypal = new PaypalPaymentProcessor(new PayPalPaymentGateway());
+                return paypal.processPayment(amount);
         }
         return false;
     }
 
-    public boolean refundPayment(float amount, ProveedorEnum provider){
+    private boolean refundPayment(float amount, ProveedorEnum provider){
         switch (provider){
             case MercadoPago:
-                MercadoPagoPaymentProcessor mercadoPagoPaymentProcessor = new MercadoPagoPaymentProcessor(new MercadoPagoPaymentGateway());
-                return mercadoPagoPaymentProcessor.refundPayment(amount);
+                MercadoPagoPaymentProcessor mercadoPago = new MercadoPagoPaymentProcessor(new MercadoPagoPaymentGateway());
+                return mercadoPago.refundPayment(amount);
             case PayPal:
-                PaypalPaymentProcessor paypalPaymentProcessor = new PaypalPaymentProcessor(new PayPalPaymentGateway());
-                return paypalPaymentProcessor.refundPayment(amount);
+                PaypalPaymentProcessor paypal = new PaypalPaymentProcessor(new PayPalPaymentGateway());
+                return paypal.refundPayment(amount);
         }
         return false;
     }

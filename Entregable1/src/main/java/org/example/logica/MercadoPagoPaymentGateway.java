@@ -13,7 +13,7 @@ public class MercadoPagoPaymentGateway implements PaymentGateway{
 
     @Override
     public boolean capture(float amount) {
-        System.out.println("[MercadoPago] Capturando $" + amount);
+        //Acá iría la lógica que descuenta el dinero de la cuenta del usuario y crea un nuevo pago
         return true;
     }
 
