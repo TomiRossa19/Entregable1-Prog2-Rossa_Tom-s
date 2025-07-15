@@ -5,10 +5,6 @@ import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 
 import org.example.logica.*;
-import org.example.logica.enums.ProveedorEnum;
-
-import java.util.Scanner;
-import java.util.concurrent.CompletableFuture;
 
 public class Main {
     public static void main(String[] args) {

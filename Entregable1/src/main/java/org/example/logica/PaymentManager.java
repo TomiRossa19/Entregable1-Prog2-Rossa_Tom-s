@@ -14,7 +14,7 @@ public class PaymentManager {
     }
 
     // Métodos síncronos internos (los que ya tenías)
-    private boolean processPayment(float amount, ProveedorEnum provider){
+    public boolean processPayment(float amount, ProveedorEnum provider){
         switch (provider){
             case MercadoPago:
                 MercadoPagoPaymentProcessor mercadoPago = new MercadoPagoPaymentProcessor(new MercadoPagoPaymentGateway());
@@ -26,7 +26,7 @@ public class PaymentManager {
         return false;
     }
 
-    private boolean refundPayment(float amount, ProveedorEnum provider){
+    public boolean refundPayment(float amount, ProveedorEnum provider){
         switch (provider){
             case MercadoPago:
                 MercadoPagoPaymentProcessor mercadoPago = new MercadoPagoPaymentProcessor(new MercadoPagoPaymentGateway());
