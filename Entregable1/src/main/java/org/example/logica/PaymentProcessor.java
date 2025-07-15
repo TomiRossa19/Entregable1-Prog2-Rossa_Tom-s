@@ -2,6 +2,11 @@ package org.example.logica;
 
 public abstract class PaymentProcessor {
     public PaymentGateway paymentGateway;
-    public abstract void processPayment(float amount);
-    public abstract void refundPayment();
+
+    public PaymentProcessor(PaymentGateway paymentGateway) {
+        this.paymentGateway = paymentGateway;
+    }
+
+    public abstract boolean processPayment(float amount);
+    public abstract boolean refundPayment(float amount);
 }
