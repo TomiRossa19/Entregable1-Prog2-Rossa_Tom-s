@@ -13,7 +13,6 @@ public class PaymentManager {
         return CompletableFuture.supplyAsync(() -> refundPayment(amount, provider));
     }
 
-    // Métodos síncronos internos (los que ya tenías)
     public boolean processPayment(float amount, ProveedorEnum provider){
         switch (provider){
             case MercadoPago:
